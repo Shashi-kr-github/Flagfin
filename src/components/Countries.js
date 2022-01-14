@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-const url = "https://restcountries.com/v3.1/all";
+const url = "http://localhost:8000/music"; // fetch from this url
 
 const Countries = () => {
   const [countries, setCountries] = useState([]);
@@ -29,16 +29,16 @@ const Countries = () => {
     }
     return countries;
   };
-  sort(countries);
+  sort(countries); // sort by name
   return (
     <>
       <section className="grid">
         {countries.map((country) => {
-          const flag = country.flags.png;
+          const flag = country.img;
           //   console.log(flag);
-          const name = country.name.official;
-          const population = country.population;
-          const region = country.continents;
+          const name = country.songname;
+          const population = country.moviename;
+          const region = country.name;
           const capital = country.capital;
           //   console.log(name);
           return (

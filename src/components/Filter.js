@@ -10,7 +10,7 @@ const Filter = () => {
         />
       </form>
 
-      <div>
+      <div className="region-filter">
         <select name="select" id="select" className="select">
           <option value="Africa">Africa</option>
           <option value="North Amrica">North Amrica </option>
