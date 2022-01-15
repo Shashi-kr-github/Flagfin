@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-const url = "http://localhost:8000/music"; // fetch from this url
+import { Link } from "react-router-dom";
+const url = "http://restcountries.com/v3.1/all"; // fetch from this url
 
 const Countries = () => {
   const [countries, setCountries] = useState([]);
@@ -17,6 +18,18 @@ const Countries = () => {
   useEffect(() => {
     fetchCountryData();
   }, []);
+
+  const removeCountry = (numericCode) => {
+    const newCountry = countries.filter((country) => {
+      console.log("line24", country.numericCode);
+      return country.numericCode != numericCode;
+    });
+    //
+    //   console.log(country.numericCode)
+    //   return (country.numericCode != numericCode)
+    // );
+    setCountries(newCountry);
+  };
   const sort = (countries) => {
     for (let i = 0; i < countries.length; i++) {
       for (let j = 0; j < countries.length - i; j++) {
@@ -34,13 +47,16 @@ const Countries = () => {
     <>
       <section className="grid">
         {countries.map((country) => {
-          const flag = country.img;
+          const flag = country.flags.svg;
           //   console.log(flag);
-          const name = country.songname;
-          const population = country.moviename;
-          const region = country.name;
+          const name = country.name.common;
+          //  console.log(name);
+          const population = country.population;
+          const region = country.continents;
           const capital = country.capital;
-          //   console.log(name);
+          const numericCode = country.ccn3;
+          // console.log(numericCode);
+          console.log(capital, region);
           return (
             <article key={name}>
               <div>
@@ -56,6 +72,17 @@ const Countries = () => {
                   <h4>
                     Capital : <span>{capital}</span>
                   </h4>
+                  <div>
+                    <Link to={`/countries/${name}`} className="btn">
+                      Learn More
+                    </Link>
+                    <button
+                      className="btn"
+                      onClick={() => removeCountry(numericCode)}
+                    >
+                      Remove Country
+                    </button>
+                  </div>
                 </div>
               </div>
             </article>
